@@ -1,5 +1,6 @@
 
 using e_books.Data;
+using e_books.Data.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Security.Cryptography.X509Certificates;
@@ -25,7 +26,8 @@ namespace e_books
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 
-
+            // App Services 
+            builder.Services.AddTransient<BooksService>();
 
             var app = builder.Build();
 
