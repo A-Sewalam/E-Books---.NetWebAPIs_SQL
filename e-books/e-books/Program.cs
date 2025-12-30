@@ -28,6 +28,8 @@ namespace e_books
 
             // App Services 
             builder.Services.AddTransient<BooksService>();
+            builder.Services.AddTransient<AuthorsService>();
+            builder.Services.AddTransient<PublishersService>();
 
             var app = builder.Build();
 

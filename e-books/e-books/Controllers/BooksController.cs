@@ -19,7 +19,7 @@ namespace e_books.Controllers
         [HttpPost("Add-Book")]
         public IActionResult AddBook([FromBody] BookVM book)
         {
-            _booksService.AddBook(book);
+            _booksService.AddBookWithAuthors(book);
             return Ok();
 
         }
