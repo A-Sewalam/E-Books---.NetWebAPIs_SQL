@@ -9,7 +9,7 @@
             public string Name { get; set; }
 
             //Navigation Properties
-            public List<Book> Books;
+            public ICollection<Book> Books { get; set; } = new List<Book>();
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using e_books.Data.ViewModels;
+﻿using e_books.Data.Models;
+using e_books.Data.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using static e_books.Data.Models.Puplisher;
 
 namespace e_books.Data.Services
@@ -21,5 +23,24 @@ namespace e_books.Data.Services
             _context.Publishers.Add(_publisher);
             _context.SaveChanges();
         }
+
+        public PublisherWithBooksAndAuthorsVM GetPublisherData(int publisherId)
+        {
+            var _publisherData = _context.Publishers
+                .Where(p => p.Id == publisherId) // p = Publisher
+                .Select(p => new PublisherWithBooksAndAuthorsVM()
+                {
+                    Name = p.Name,
+                    BookAuthors = p.Books.Select(b => new BookAuthorVM() // b = Book
+                    {
+                        BookName = b.Title,
+                        // ba = Book_Author (Join Table)
+                        BookAuthors = b.Book_Authors.Select(ba => ba.Author.FullName).ToList()
+                    }).ToList()
+                }).FirstOrDefault();
+
+            return _publisherData;
+        }
+
     }
 }

@@ -19,7 +19,8 @@ namespace e_books.Data.Models
         public int? PublisherId { get; set; } // nameId => Forigen Key
         public Publisher Publisher { get; set; }
 
-        public List<Book_Author> Book_Authors { get; set; }
+        //   public List<Book_Author> Book_Authors { get; set; }
+        public ICollection<Book_Author> Book_Authors { get; set; }
     }
 
 }
