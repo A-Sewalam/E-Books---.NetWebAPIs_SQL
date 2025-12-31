@@ -21,6 +21,17 @@ namespace e_books.Data.Services
             _context.SaveChanges();
         }
 
-       
+        public AuthorWithBooksVM GetAuthorWithBooks(int authorId)
+        {
+            var _authorBooks = _context.Authors.Where(n => n.Id == authorId).Select(n => new AuthorWithBooksVM()
+            {
+                FullName = n.FullName,
+                BookTitles = n.Book_Authors.Select(n => n.Book.Title).ToList()
+            }).FirstOrDefault();
+
+            return _authorBooks;
+
+          
+        }
     }
 }
